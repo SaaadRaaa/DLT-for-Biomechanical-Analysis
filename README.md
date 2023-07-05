@@ -8,17 +8,6 @@ This repository contains the implementation of the Direct Linear Transform (DLT)
 - Point reconstruction in 2D and 3D space
 - Error analysis and validation
 
-## Usage
-1. Clone the repository: `git clone https://github.com/SaaadRaaa/DLT-for-Biomechanical-Analysis.git`
-2. Follow the instructions in the documentation to calibrate your cameras and perform point reconstruction.
-3. Customize the code as needed for your specific application.
-
-## Documentation
-Please refer to the [documentation](docs/README.md) for detailed instructions on using the DLT algorithm for camera calibration in biomechanical analysis.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 We would like to thank the contributors and researchers in the field of biomechanics for their valuable insights and support.
 
