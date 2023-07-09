@@ -77,7 +77,7 @@ def process_image(image_path):
             x, y, w, h = cv2.boundingRect(contour)
 
             # Draw a rectangle around the marker (in green color)
-            cv2.rectangle(image_uv, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cv2.rectangle(image_uv, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
     # Display the image with marker squares
     cv2.namedWindow("Marker Detection", cv2.WINDOW_NORMAL)
