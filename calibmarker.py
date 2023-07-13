@@ -54,7 +54,7 @@ def process_image(image_path):
     image_uv = image.copy()
 
     # Marker detection parameters
-    marker_threshold = 250  # Adjust this threshold based on marker visibility
+    marker_threshold = 100  # Adjust this threshold based on marker visibility
 
     # Convert the image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

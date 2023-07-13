@@ -28,6 +28,8 @@ Ls = []
 for matrix in calib_matrices:
     Ls.append(matrix.tolist())  # Convert NumPy array to list
     # Use Ls as needed for further processing
+print("Calibration matrices:")
+print(Ls)
 
 if nc != len(uv):
     raise ValueError("Invalid number of cameras.")
