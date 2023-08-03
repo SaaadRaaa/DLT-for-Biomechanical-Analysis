@@ -2,13 +2,12 @@ import numpy as np
 import calibmarker
 from Calibration import DLTcalib
 from Reconstruction import DLTrecon
+import pickle
 
 # List of image paths
-image_paths = ["D:/MaCodes/DLT/cam1.JPG",
-               "D:/MaCodes/DLT/cam2.JPG"]
+image_paths = ["DLT/photos/photo1.JPG"]
 
-xyz = [[44, 0, 37], [44, 0, 0], [0, 0, 38],
-       [0, 46, 0], [0, 46, 38], [44, 45, 37]]
+xyz = [[0, 0], [48, 0], [0, 57.5], [48, 53.6]]
 
 nd = len(xyz[0])
 
@@ -30,6 +29,10 @@ for matrix in calib_matrices:
     # Use Ls as needed for further processing
 print("Calibration matrices:")
 print(Ls)
+
+# Save Ls to a pickle file
+with open("calibration_params.pkl", "wb") as f:
+    pickle.dump(Ls, f)
 
 if nc != len(uv):
     raise ValueError("Invalid number of cameras.")
