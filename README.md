@@ -16,6 +16,60 @@ This repository contains the implementation of the Direct Linear Transform (DLT)
    ```bash
    git clone https://github.com/SaaadRaaa/DLT-for-Biomechanical-Analysis.git
 
+## Usage
+
+### Calibration.py
+This file contains functions for camera calibration using the Direct Linear Transform (DLT) algorithm. Calibration is the process of determining the intrinsic and extrinsic camera parameters required to map image points to real-world coordinates. The functions in this file are designed to handle both 2D and 3D calibration.
+
+**Usage:**
+1. Import the `Calibration` module in your Python script.
+2. Prepare calibration points in real-world coordinates (`xyz`) and their corresponding image points (`uv`) collected from images of a calibration pattern.
+3. Call the `DLTcalib` function with the `nd`, `xyz`, and `uv` as arguments to obtain the camera calibration matrices (`Ls`).
+4. The calibration matrices (`Ls`) can be saved and used for 2D or 3D point reconstruction.
+
+### Reconstruction.py
+This file contains a function for reconstructing object points from image points based on the DLT parameters obtained during calibration. Reconstruction involves mapping image points captured by multiple cameras to their corresponding real-world 2D or 3D coordinates.
+
+**Usage:**
+1. Import the `Reconstruction` module in your Python script.
+2. Load the camera calibration matrices (`Ls`) previously obtained during the calibration phase.
+3. Prepare a list of pixel coordinates (`uv`) collected from multiple cameras for each frame in a video.
+4. Call the `DLTrecon` function with the `nd`, `nc`, `Ls`, and `uv` as arguments to obtain the reconstructed object points (`XYZ`) for each frame.
+5. The reconstructed points can be used for further biomechanical analysis.
+
+### calibmarker.py
+This file contains functions for detecting markers in images using a mouse-driven interactive approach. The user is prompted to manually mark the position of markers in each image by clicking on them. These pixel coordinates will be later used for camera calibration.
+
+**Usage:**
+1. Import the `calibmarker` module in your Python script.
+2. Prepare a list of image paths (`image_paths`) containing images of the calibration pattern with visible markers.
+3. Call the `returnUV` function with `image_paths` as an argument to start the marker detection process.
+4. The function will display the images, and the user needs to click on the markers using the mouse to record their pixel coordinates.
+5. The pixel coordinates of the markers will be saved as a list of lists (`uv`), which can be used for camera calibration.
+
+### mainCalibration.py
+This is the main script for camera calibration using the DLT algorithm. It utilizes functions from `Calibration.py` and `calibmarker.py` to perform the calibration process.
+
+**Usage:**
+1. Import the required modules and functions.
+2. Prepare a list of image paths (`image_paths`) containing images of the calibration pattern with visible markers.
+3. Define the real-world coordinates of the calibration points (`xyz`) and the number of dimensions (`nd`) of the object space.
+4. Call the `returnUV` function from `calibmarker.py` to obtain the pixel coordinates of the detected markers for each image.
+5. Use the pixel coordinates and real-world coordinates to perform camera calibration using the `DLTcalib` function from `Calibration.py`.
+6. The calibration matrices (`Ls`) will be saved and can be used for further 2D or 3D point reconstruction.
+
+### mainReconstruction.py
+This is the main script for reconstructing object points from video frames using DLT parameters obtained during calibration. It utilizes functions from `Reconstruction.py` and `markerdet.py` to detect markers in the video frames.
+
+**Usage:**
+1. Import the required modules and functions.
+2. Load the camera calibration matrices (`Ls`) obtained during the calibration phase.
+3. Prepare a list of video paths (`video_paths`) containing video footage of the markers in motion.
+4. Call the `returnUV` function from `markerdet.py` to detect the markers in each video frame and obtain their pixel coordinates.
+5. Use the pixel coordinates and calibration matrices (`Ls`) to perform 2D or 3D point reconstruction using the `DLTrecon` function from `Reconstruction.py`.
+6. The reconstructed points for each frame will be saved as a CSV file containing frame numbers and their corresponding 2D or 3D coordinates.
+
+
 ## Contributing
 
 Contributions to this project are highly encouraged and appreciated. If you find any bugs, have feature suggestions, or want to improve the existing code, please follow these guidelines to contribute:
