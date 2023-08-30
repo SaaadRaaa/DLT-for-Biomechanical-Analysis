@@ -2,8 +2,8 @@ import cv2
 
 
 # Define the marker size (in pixels)
-marker_size = 50
-
+marker_size = 1
+numbersize = 0.01
 # List to store the pixel coordinates and assigned numbers of markers for each image
 uv = []
 
@@ -27,7 +27,7 @@ def mouse_callback(event, x, y, flags, param):
 
         # Put the marker number on the marker
         cv2.putText(image_uv, str(marker_number), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX,
-                    3, (0, 0, 255), 2)
+                    numbersize, (0, 0, 255), 2)
 
         # Store the pixel coordinates and assigned number in the list for the current image
         uv[-1].append((x, y))
@@ -54,7 +54,7 @@ def process_image(image_path):
     image_uv = image.copy()
 
     # Marker detection parameters
-    marker_threshold = 100  # Adjust this threshold based on marker visibility
+    marker_threshold = 255  # Adjust this threshold based on marker visibility
 
     # Convert the image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

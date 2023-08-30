@@ -60,5 +60,4 @@ def DLTrecon(nd, nc, Ls, uvs):
     U, S, Vh = np.linalg.svd(np.asarray(M))
     # Point coordinates in space:
     xyz = Vh[-1, 0:-1] / Vh[-1, -1]
-
     return xyz

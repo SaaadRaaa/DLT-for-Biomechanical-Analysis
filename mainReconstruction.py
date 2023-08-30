@@ -4,9 +4,9 @@ from Reconstruction import DLTrecon
 import markerdet
 
 # List of video paths
-video_paths = ["D:\MaCodes\DLT\photos\photo4.MOV"]
+video_paths = ["D:\MaCodes\DLT\moy.MOV"]
 minArea = 20
-marker_threshold = 60  # Adjust this threshold based on marker visibility
+marker_threshold = 100  # Adjust this threshold based on marker visibility
 
 
 # Load the calibration matrices (Ls) from the pickle file
@@ -23,8 +23,7 @@ if nd != 2 and nd != 3:
         "Invalid number of dimensions (nd) in the calibration matrices.")
 
 
-uv = markerdet.returnUV(video_paths)
-
+uv = markerdet.returnUV(video_paths, marker_threshold, minArea)
 # Check if the number of cameras (views) used for calibration matches the number of detected marker sets
 nc = len(uv[0])
 if nc != len(Ls):
@@ -37,7 +36,8 @@ if nd == 2:
     for frame in uv:
         frame_XY = []
         for i in range(len(frame[0])):
-            frame_XY.append(DLTrecon(nd, nc, Ls, [view[i] for view in frame]))
+            frame_XY.append(
+                DLTrecon(nd, nc, Ls, [view[i] for view in frame])[::-1])
         XY.append(frame_XY)
 
     # Save reconstructed points to CSV file
@@ -63,7 +63,8 @@ elif nd == 3:
     for frame in uv:
         frame_XYZ = []
         for i in range(len(frame[0])):
-            frame_XYZ.append(DLTrecon(nd, nc, Ls, [view[i] for view in frame]))
+            frame_XYZ.append(
+                DLTrecon(nd, nc, Ls, [view[i] for view in frame])[::-1])
         XYZ.append(frame_XYZ)
 
     # Save reconstructed points to CSV file

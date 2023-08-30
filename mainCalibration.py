@@ -5,15 +5,16 @@ from Reconstruction import DLTrecon
 import pickle
 
 # List of image paths
-image_paths = ["DLT/photos/photo1.JPG"]
+image_paths = ["D:\MaCodes\DLT\mov.jpg"]
 
-xyz = [[0, 0], [48, 0], [0, 57.5], [48, 53.6]]
+xyz = [[0, 0], [35.525, 0], [71.05, 0],
+       [0, 24.5], [35.525, 24.5], [71.05, 24.5],
+       [0, 49], [35.525, 49], [71.05, 49]]
 
 nd = len(xyz[0])
 
 # Call the returnUV function from calibmarker module to get marker coordinates
 uv = calibmarker.returnUV(image_paths)
-print(uv)
 
 nc = len(uv)
 

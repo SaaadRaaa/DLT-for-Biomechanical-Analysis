@@ -34,7 +34,7 @@ def returnUV(video_paths, marker_threshold=60, minArea=20):
                 cv2.imshow("Marker Detection", frame)
 
         # Create a window for displaying the video
-        cv2.namedWindow("Marker Detection")
+        cv2.namedWindow("Marker Detection", cv2.WINDOW_NORMAL)
         cv2.setMouseCallback("Marker Detection", assign_marker_id)
 
         frame_count = 0  # Counter to keep track of frame number
@@ -86,7 +86,7 @@ def returnUV(video_paths, marker_threshold=60, minArea=20):
 
             # Stop the video and wait for user input to assign IDs
             if assigning_ids:
-                if cv2.waitKey(0) & 0xFF == ord('q'):
+                if cv2.waitKey(1) & 0xFF == ord('q'):
                     assigning_ids = False
                     cv2.destroyAllWindows()
 
@@ -137,6 +137,7 @@ def returnUV(video_paths, marker_threshold=60, minArea=20):
                             font_scale, (0, 0, 255), font_thickness)
 
             # Display the frame with the tracked markers
+            cv2.namedWindow("Marker Tracking", cv2.WINDOW_NORMAL)
             cv2.imshow("Marker Tracking", frame)
 
             # Append the marker coordinates to the current frame in the uv list
@@ -155,4 +156,5 @@ def returnUV(video_paths, marker_threshold=60, minArea=20):
         # Release the video capture and close the window
         video.release()
         cv2.destroyAllWindows()
+
     return uv
